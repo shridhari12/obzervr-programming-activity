@@ -1,0 +1,8 @@
+nav {
+    margin: 10px;
+    display: block;
+}
+
+nav > a {
+    padding: 5px;
+}

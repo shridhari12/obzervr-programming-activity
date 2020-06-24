@@ -1,0 +1,14 @@
+<div class="map-container">
+    <div class="map-header">
+        <h4>Welcome to the MAIN CHILD component</h4>
+        <button class="map-button" (click)="showMapComponent()">{{mapButtonText}}</button>
+        
+    </div>
+    <div *ngIf="showMap; else showMapInfo" class="map-control">
+        <app-map-control></app-map-control>
+    </div>
+</div>
+
+<ng-template #showMapInfo>
+    <p>We will do something in the absence of the component being present</p>
+</ng-template>

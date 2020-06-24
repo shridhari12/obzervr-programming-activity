@@ -1,0 +1,8 @@
+button.map-button {
+    border-radius: 50px;
+    background-color: #703B09;
+    padding: 10px;
+    margin: 10px;
+    color: white;
+    font-weight: bold;
+}
