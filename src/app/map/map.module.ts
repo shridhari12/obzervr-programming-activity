@@ -4,13 +4,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MapComponent } from './components/map/map.component';
 import { MapControlComponent } from './components/map-control/map-control.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { BigqueryService } from './services/bigquery/bigquery.service';
 
 @NgModule({
   declarations: [
     MapComponent,
     MapControlComponent
   ],
-  providers: [],
+  providers: [
+    BigqueryService
+  ],
   imports: [
     CommonModule,
     FormsModule,
