@@ -1,26 +1,31 @@
 <div class="map-container">
     <div class="map-header">
-        <h4>Welcome to the MAIN MAP component</h4>
+        <h4>Welcome to the NYC Taxi Trip MAP</h4>
         <button class="map-button" (click)="showMapComponent()">{{mapButtonText}}</button>
         
     </div>
     <div *ngIf="showMap; else showMapInfo" class="map-control">
         <p>Below is the control: </p>
-        <!-- <app-map-control></app-map-control> -->
+        <app-map-control [mapPoints]="mapDataPoints"></app-map-control>
     </div>
 </div>
 
 <ng-template #showMapInfo>
-    <p>We will do something in the absence of the component being present</p>
-    <div class="search-form">
+    <p>Please search for the NYC Taxi trips between two dates ... </p>
+    <div class="search-form form-group">
         <form [formGroup]="showInMapForm" (ngSubmit)="onSubmit()">
-            <input type = "text" name = "startDt" placeholder = "dd/mm/yyyy hh:mm" formControlName="startDt" >
-            <br/>
-            
-            <input type = "text" name = "endDt" placeholder = "dd/mm/yyyy hh:mm" formControlName="endDt" >
-            <br/>
-            
-            <input type = "submit" value = "SHOW IN MAP">
+            <div class="pickup-dt">
+                <label for="pickupDate">Pickup Date</label>
+                <input type = "text" name = "pickupDt" placeholder = "dd/mm/yyyy hh:mm" id="pickupDate" formControlName="pickupDt" >
+            </div>
+            <div class="dropoff-dt">
+                <label for="dropoffDate">Dropoff Date</label>
+                <input type = "text" name = "dropoffDt" placeholder = "dd/mm/yyyy hh:mm" id="dropoffDate" formControlName="dropoffDt" >
+            </div>
+            <div class="btn-submit">
+                <!-- <input type = "submit" value = "SHOW IN MAP"> -->
+                <button class="submit-button">SHOW IN MAP</button>
+            </div>
           </form>
     </div>
 </ng-template>

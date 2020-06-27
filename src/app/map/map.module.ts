@@ -5,6 +5,8 @@ import { MapComponent } from './components/map/map.component';
 import { MapControlComponent } from './components/map-control/map-control.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { BigqueryService } from './services/bigquery/bigquery.service';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { BigqueryService } from './services/bigquery/bigquery.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    BrowserModule,
+    HttpClientModule
   ]
 })
 export class MapModule { }

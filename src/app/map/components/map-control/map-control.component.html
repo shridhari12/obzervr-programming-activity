@@ -1,6 +1,6 @@
 <div class="map-control-container">
     <div class="map-control-header"></div>
-    <div class="map-control-details">
+    <div class="map-control-details" id="map">
         <google-map
          [zoom]="zoom"
          [center]="center"
@@ -13,8 +13,9 @@
              [label]="marker.label"
              [title]="marker.title"
              [options]="marker.options"
-             (mapClick)="openInfo(markerElem, marker.info)"
-        ></map-marker>
+             (mapClick)="openInfo(markerElem, marker.info)" >
+            </map-marker>
+            <map-polyline></map-polyline>
 
         <map-info-window>{{ infoContent }}</map-info-window>
         </google-map>
@@ -22,6 +23,6 @@
         <button (click)="zoomIn()">Zoom in</button>
         <button (click)="zoomOut()">Zoom out</button>
         <button (click)="logCenter()">Log center</button>
-        <button (click)="addMarker()">Add marker</button>
+        <button (click)="addSampleMarker()">Add marker</button>
     </div>
 </div>
