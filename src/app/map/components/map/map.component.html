@@ -1,8 +1,7 @@
 <div class="map-container">
     <div class="map-header">
         <h4>Welcome to the NYC Taxi Trip MAP</h4>
-        <button class="map-button" (click)="showMapComponent()">{{mapButtonText}}</button>
-        
+        <!-- <button class="map-button" (click)="showMapComponent()">{{mapButtonText}}</button> -->
     </div>
     <div *ngIf="showMap; else showMapInfo" class="map-control">
         <p>Below is the control: </p>

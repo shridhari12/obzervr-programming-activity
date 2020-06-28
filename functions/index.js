@@ -88,7 +88,8 @@ exports.bigQueryFetchData = functions.https.onRequest((request, response) => {
 // ORDER BY view_count DESC
 // LIMIT 10`;
 
-//"2015-01-15 02:00:00+00" 2015-01-15 02:30:00+00
+pickupDateTime = "2015-01-15 02:00:00+00"; 
+dropoffDateTime = "2015-01-15 02:30:00+00";
     const sqlQuery = `SELECT 
     pickup_datetime,
     pickup_longitude,
@@ -117,7 +118,6 @@ exports.bigQueryFetchData = functions.https.onRequest((request, response) => {
     .then(result => {
         let rows = result[0];
         console.debug('result [result] length ', rows.length, ' JSON ==> ', JSON.stringify(rows));
-        
         //return result[0];
         //return responseCors(request, response, result[0]);
         //response.send("Hello from Firebase!");

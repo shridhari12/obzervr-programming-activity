@@ -1,28 +1,71 @@
 <div class="map-control-container">
-    <div class="map-control-header"></div>
-    <div class="map-control-details" id="map">
-        <google-map
+    <div class="map-control-header">NYC Cab Trip Map</div>
+    <div class="map-control-details">
+        <p>Map Points ==> {{ mapPoints.length }}</p>
+        <p>Map Markers ==> {{ markers.length }}</p>
+        <!-- <agm-map
+         [latitude]="lat"
+         [longitude]="lng"
          [zoom]="zoom"
-         [center]="center"
-         [options]="options"
-         (mapClick)="googleMapClickHandler($event)">
-            <map-marker 
-             #markerElem
-             *ngFor="let marker of markers"
-             [position]="marker.position"
-             [label]="marker.label"
-             [title]="marker.title"
-             [options]="marker.options"
-             (mapClick)="openInfo(markerElem, marker.info)" >
-            </map-marker>
-            <map-polyline></map-polyline>
+         (mapClick)="mapClickHandler($event)"
+         [disableDefaultUI]="false"
+         [mapTypeId]="mapTypeId"
+        >
+            <agm-marker
+                *ngFor="let m of markers; let i = index"
+                [latitude]="m.lat"
+                [longitude]="m.lng"
+                (markerClick)="markerClickHandler(m.label, i)"
+                [markerDraggable]="m.draggable"
+                [label]="m.label"
+            >
+                <agm-info-window>
+                    <strong>{{ infoContent }}</strong>
+                </agm-info-window>
 
-        <map-info-window>{{ infoContent }}</map-info-window>
-        </google-map>
+            </agm-marker>
+        </agm-map> -->
+        
+        <agm-map
+         [latitude]="lat"
+         [longitude]="lng"
+         [zoom]="zoom"
+         (mapClick)="mapClickHandler($event)"
+         [disableDefaultUI]="false"
+         [mapTypeId]="mapTypeId"
+         
+        >
+            <agm-marker
+                *ngFor="let m of markers; let i = index"
+                [latitude]="m.lat"
+                [longitude]="m.lng"
+                (markerClick)="markerClickHandler(m.label, i)"
+                [markerDraggable]="m.draggable"
+                [label]="m.label"
+            >
+                <agm-info-window>
+                    <strong>{{ infoContent }}</strong>
+                </agm-info-window>
 
-        <button (click)="zoomIn()">Zoom in</button>
-        <button (click)="zoomOut()">Zoom out</button>
-        <button (click)="logCenter()">Log center</button>
-        <button (click)="addSampleMarker()">Add marker</button>
+            </agm-marker>
+            <!-- <agm-direction
+              [origin]="origin"
+              [destination]="destination"
+            ></agm-direction> -->
+            <agm-polyline [draggable]="true" [editable]="true" [visible]="true" [strokeWeight]="3"
+            [strokeColor]="'#07b57a'"> 
+                <agm-polyline-point
+                    *ngFor="let coordinate of latlng; let i=index"
+                    [latitude]="coordinate[0]"
+                    [longitude]="coordinate[1]">
+                </agm-polyline-point>
+                <!-- <agm-polyline-point [latitude]="39.9568977" [longitude]="-75.594635"> </agm-polyline-point> 
+                <agm-polyline-point [latitude]="40.9568977" [longitude]="-76.594635"> </agm-polyline-point>  -->
+            </agm-polyline>
+            <!-- <agm-polyline [visible]="true" [strokeWeight]="3"
+                [strokeColor]="'#07b57a'">
+                
+            </agm-polyline> -->
+        </agm-map>
     </div>
 </div>
