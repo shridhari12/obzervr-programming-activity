@@ -1,8 +1,6 @@
 <div class="map-control-container">
     <div class="map-control-header">NYC Cab Trip Map</div>
     <div class="map-control-details">
-        <p>Map Points ==> {{ mapPoints.length }}</p>
-        <p>Map Markers ==> {{ markers.length }}</p>
         <!-- <agm-map
          [latitude]="lat"
          [longitude]="lng"
@@ -35,23 +33,22 @@
          [mapTypeId]="mapTypeId"
          
         >
+        <!-- <agm-marker-cluster *ngFor="let item of markerClusters; let i = index"> -->
             <agm-marker
-                *ngFor="let m of markers; let i = index"
-                [latitude]="m.lat"
-                [longitude]="m.lng"
-                (markerClick)="markerClickHandler(m.label, i)"
-                [markerDraggable]="m.draggable"
-                [label]="m.label"
+            *ngFor="let m of markers; let i = index"
+            [latitude]="m.lat"
+            [longitude]="m.lng"
+            (markerClick)="markerClickHandler(m.label, i)"
+            [markerDraggable]="m.draggable"
+            [label]="m.label"
             >
-                <agm-info-window>
-                    <strong>{{ infoContent }}</strong>
-                </agm-info-window>
+            <agm-info-window>
+                <strong>{{ infoContent }}</strong>
+            </agm-info-window>
 
             </agm-marker>
-            <!-- <agm-direction
-              [origin]="origin"
-              [destination]="destination"
-            ></agm-direction> -->
+        <!-- </agm-marker-cluster> -->
+            
             <agm-polyline [draggable]="true" [editable]="true" [visible]="true" [strokeWeight]="3"
             [strokeColor]="'#07b57a'"> 
                 <agm-polyline-point
@@ -59,13 +56,7 @@
                     [latitude]="coordinate[0]"
                     [longitude]="coordinate[1]">
                 </agm-polyline-point>
-                <!-- <agm-polyline-point [latitude]="39.9568977" [longitude]="-75.594635"> </agm-polyline-point> 
-                <agm-polyline-point [latitude]="40.9568977" [longitude]="-76.594635"> </agm-polyline-point>  -->
             </agm-polyline>
-            <!-- <agm-polyline [visible]="true" [strokeWeight]="3"
-                [strokeColor]="'#07b57a'">
-                
-            </agm-polyline> -->
         </agm-map>
     </div>
 </div>

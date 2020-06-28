@@ -5,6 +5,7 @@ import { YellowTrip } from '../../models/yellow-trip.model';
 import { MessageService } from 'src/app/shared/services/message/message.service';
 import { MouseEvent, AgmMap, GoogleMapsAPIWrapper } from '@agm/core';
 import { Marker } from '../../models/marker.model';
+import { GoogleMap } from '@agm/core/services/google-maps-types';
 
 declare var google: any;
 
@@ -15,9 +16,6 @@ declare var google: any;
 })
 
 export class MapControlComponent implements OnInit, AfterViewInit {
-  // @ViewChild(MapInfoWindow, { static: false}) infoWindow: MapInfoWindow;
-  // @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
-  // @ViewChild('map') gMap: google.maps.Map;
   @ViewChild(AgmMap) map: AgmMap;
 
   @Input() mapPoints: Array<YellowTrip>;
@@ -38,30 +36,15 @@ export class MapControlComponent implements OnInit, AfterViewInit {
   origin: any;
   destination: any;
 
-  // center: google.maps.LatLngLiteral;
-  // options: google.maps.MapOptions = {
-  //   mapTypeId: 'hybrid',
-  //   zoomControl: false,
-  //   scrollwheel: false,
-  //   disableDoubleClickZoom: true,
-  //   maxZoom: 15,
-  //   minZoom: 8
-  // };
-
   constructor(private messageService: MessageService) { //,
               // private mapsWrapper: GoogleMapsAPIWrapper) {
     this.messageService.add('[map-control] component initializing');
-    // this.map.data.loadGeoJson('/')
    }
 
   ngOnInit(): void {
     this.messageService.add('[map-control][ngOnInit]');
     console.log('[ngOnInit] [mapPoints] ', this.mapPoints.length);
     this.getDirection();
-    // this.center = {
-    //   lat: 40.7305,
-    //   lng: -73.9091
-    // };
     this.mapPoints.map((mapPoint, i) => {
       this.addMapMarker(mapPoint.pickupLatitude, mapPoint.pickupLongitude, `P-${i}`);
       this.addMapMarker(mapPoint.dropoffLatitude, mapPoint.dropoffLongitude, `D-${i}`);
@@ -73,27 +56,6 @@ export class MapControlComponent implements OnInit, AfterViewInit {
       this.latlng.push(...pickupDropoffCoords);
     });
 
-    // this.latlng = this.markers.slice(0, 2);
-    // this.pickupDropffMark.push(this.latlng[0]);
-    // this.pickupDropffMark.push(this.latlng[this.latlng.length - 1]);
-    // this.latlng = this.markers;
-    // const markerCluster = new MarkerClusterer(gMapObject, this.markers, {
-    //   imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
-    // });
-    // const tripLatLongArray = this.convertTripDataToLatLongArray();
-    // const markers = tripLatLongArray.map((mapPoint, i) => {
-    //   return new google.maps.Marker({
-    //     position: mapPoint,
-    //     label: this.labels[i % this.labels.length]
-    //   });
-    // });
-
-    // // Add marker cluster to manage the markers
-    // const markerCluster = new MarkerClusterer(gMapObject, markers,
-    //   {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'}
-    // );
-    // this.plotLines();
-    // this.initMap();
   }
 
   ngAfterViewInit() {

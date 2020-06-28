@@ -24,7 +24,6 @@
     "@angular/router": "~9.1.9",
     "@google-cloud/bigquery": "^5.0.0",
     "@google/markerclusterer": "^2.0.8",
-    "agm-direction": "^0.8.0",
     "cors": "^2.8.5",
     "firebase": "^7.15.5",
     "rxjs": "~6.5.4",

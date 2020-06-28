@@ -5,39 +5,6 @@ const cors = require('cors')({
 
 // Imports the Google Cloud client library
 const { BigQuery } = require('@google-cloud/bigquery');
-//const bigquery = require('@google-cloud/bigquery')();
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// async function createDatasetIfNotExists(datasetName) {
-//     // Creates a client
-//     const bigqueryClient = new BigQuery();
-
-//     // Lists all datasets in the specified project
-//     const [datasets] = await bigqueryClient.getDatasets();
-//     const isExist = datasets.find(dataset => dataset.id == datasetName);
-
-//     if (isExist)
-//         return Promise.resolve([isExist]);
-
-//     // Create the dataset
-//     return bigqueryClient.createDataset(datasetName);
-// }
-
-// async function executeQuery(query) {
-//     // Creates a client
-//     const bigqueryClient = new BigQuery();
-//     const sqlQuery = query;
-
-//     const options = {
-//         query: sqlQuery,
-//         timeoutMs: 100000, // Time out after 100 seconds.
-//         useLegacySql: false, // Use standard SQL syntax for queries.
-//     };
-
-//     // Runs the query
-//     return bigqueryClient.query(options);
-// }
 
 // // Cors response to handle the result from BigQuery
 function responseCors(req, res, data) {
@@ -49,11 +16,11 @@ function responseCors(req, res, data) {
 }
 
 // // Cors error when the function throw an error
-// function errorCors(req, res, error) {
-//     return cors(req, res, () => {
-//         res.status(500).send(error);
-//     });
-// }
+function errorCors(req, res, error) {
+    return cors(req, res, () => {
+        res.status(500).send(error);
+    });
+}
 // exports.helloWorld = functions.https.onRequest((request, response) => {
 //  response.send("Hello from Firebase!");
 // });
@@ -70,26 +37,8 @@ exports.bigQueryFetchData = functions.https.onRequest((request, response) => {
         console.info('request [body] [pickupDt] ', pickupDateTime, ' [dropoffDt] ', dropoffDateTime);
     }
     
-    // // Creates a client
-    // const bigqueryClient = new BigQuery();
-
-     // Lists all datasets in the specified project
-    //  const [datasets] =  bqClient.getDatasets();
-    //  console.log('[datasets] ', datasets);
-
-    // The SQL query to run
-//     const sqlQuery = `SELECT
-// CONCAT(
-//   'https://stackoverflow.com/questions/',
-//   CAST(id as STRING)) as url,
-// view_count
-// FROM \`bigquery-public-data.stackoverflow.posts_questions\`
-// WHERE tags like '%google-bigquery%'
-// ORDER BY view_count DESC
-// LIMIT 10`;
-
-pickupDateTime = "2015-01-15 02:00:00+00"; 
-dropoffDateTime = "2015-01-15 02:30:00+00";
+pickupDateTime = "2015-01-15 02:00:00+00"; //TO BE RETRIEVED FROM REQUEST BODY
+dropoffDateTime = "2015-01-15 02:30:00+00"; //TO BE RETRIEVED FROM REQUEST BODY
     const sqlQuery = `SELECT 
     pickup_datetime,
     pickup_longitude,
@@ -110,7 +59,6 @@ dropoffDateTime = "2015-01-15 02:30:00+00";
     };
     console.info('[bigQueryFetchData] about to run query now ...');
 
-    //const [rows] = bqClient.query(sqlQuery).then(result =>  { console.info('then block'); return result[0] });
     let bqResponse = bqClient.query({
         query: sqlQuery,
         location: 'US'
@@ -118,24 +66,13 @@ dropoffDateTime = "2015-01-15 02:30:00+00";
     .then(result => {
         let rows = result[0];
         console.debug('result [result] length ', rows.length, ' JSON ==> ', JSON.stringify(rows));
-        //return result[0];
-        //return responseCors(request, response, result[0]);
-        //response.send("Hello from Firebase!");
         return cors(request, response, () => {
             response.status(200).send(rows);
         });
-        //response.send(rows);
-        //return result;
-        //response.send("Hello from Firebase!");
     })
     .catch(err => {
         console.error('error encountered');
         console.log(err);
     })
 
-    //console.log('[bqResponse] ', bqResponse);
-    // Run the query
-    //const [rows] = await bqClient.query(options);
-    // console.info('[bigQueryFetchData] query complete [rows] ', rows);
-    //response.send('Hello from Firebase');
 });
