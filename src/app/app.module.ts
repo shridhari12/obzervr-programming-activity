@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { MapModule } from './map/map.module';
 import { SharedModule } from './shared/shared.module';
 import { MessagesComponent } from './shared/components/messages/messages.component';
+import { LoginComponent } from './shared/components/login/login.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from '../environments/environment';
 
 @NgModule({
   schemas: [
@@ -19,7 +23,9 @@ import { MessagesComponent } from './shared/components/messages/messages.compone
     BrowserModule,
     MapModule,
     SharedModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
